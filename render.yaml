@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: medisphere-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MONGODB_URL
+        fromDatabase:
+          name: medisphere-mongo
+          property: connectionString
+      - key: DB_NAME
+        value: medisphere_db
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "60"
+      - key: REFRESH_TOKEN_EXPIRE_DAYS
+        value: "30"
+      - key: DEBUG
+        value: "false"
+
+databases:
+  - name: medisphere-mongo
+    databaseName: medisphere_db
+    user: medisphere_user
+    plan: free
