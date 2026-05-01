@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+/* Suppress Tailwind v4 linter warnings */
+@theme {
+  --color-primary: #0284c7;
+  --color-primary-light: #0ea5e9;
+  --color-primary-dark: #0c4a6e;
+  --color-primary-pale: #e0f2fe;
+
+  --color-secondary: #059669;
+  --color-secondary-light: #10b981;
+  --color-secondary-dark: #065f46;
+  --color-secondary-pale: #d1fae5;
+
+  --color-accent: #0891b2;
+  --color-accent-light: #06b6d4;
+  --color-accent-pale: #cffafe;
+
+  --color-medical-bg: #f0f9ff;
+  --color-medical-card: #ffffff;
+  --color-medical-border: #bae6fd;
+
+  --font-outfit: "Outfit", sans-serif;
+  --font-jakarta: "Plus Jakarta Sans", sans-serif;
+}
+
+:root {
+  --primary: var(--color-primary);
+  --primary-light: var(--color-primary-light);
+  --primary-dark: var(--color-primary-dark);
+  --primary-pale: var(--color-primary-pale);
+  --jakarta: var(--font-jakarta);
+}
+
+body {
+  font-family: var(--jakarta);
+  background: #f8fafc;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.05) 0px, transparent 50%);
+  min-height: 100vh;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  border-color: var(--primary-light);
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #0C4A6E 0%, #0284C7 45%, #0891B2 100%);
+}
+
+.card-hover {
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(2, 132, 199, 0.15);
+}
+
+.feature-icon {
+  background: linear-gradient(135deg, #E0F2FE, #BAE6FD);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* ── PRINT STYLES ────────────────────────────────────────────────────────── */
+@media print {
+  /* Reset and hide basic UI */
+  nav, footer, .no-print, button, .backdrop-blur-md, .bg-slate-900\/80 {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Force display of containers for printable content */
+  html, body, #root, #root > div, main {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    position: static !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure the fixed modal container becomes a normal block during print */
+   .fixed.inset-0 {
+     position: absolute !important;
+     top: 0 !important;
+     left: 0 !important;
+     width: 100% !important;
+     height: auto !important;
+     display: block !important;
+     z-index: auto !important;
+     background: white !important;
+   }
+
+   /* Remove height restrictions and shadows from the modal wrapper during print */
+   .fixed.inset-0 > div {
+     position: static !important;
+     max-height: none !important;
+     height: auto !important;
+     width: 100% !important;
+     max-width: none !important;
+     overflow: visible !important;
+     display: block !important;
+     box-shadow: none !important;
+     border: none !important;
+     border-radius: 0 !important;
+   }
+
+  /* Hide the background page content when printing a report or receipt */
+  /* We hide everything inside main except the modal container */
+  main > div:not(.fixed) {
+    display: none !important;
+  }
+
+  /* The actual report/receipt styling */
+  .printable-report, .printable-receipt {
+    display: block !important;
+    visibility: visible !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0.5cm !important;
+    background: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    min-height: auto !important;
+  }
+
+  /* Force colors to print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}
+
+.anim {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.anim-fade-up {
+  animation: fadeUp 0.5s ease-out both;
+}
+
+.anim-fade-in {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+.anim-shake {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.anim-2 {
+  animation: fadeUp 0.7s 0.15s ease both;
+}
+
+.anim-3 {
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+@keyframes pulseR {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(14, 165, 233, 0);
+  }
+}
+
+.pulse-ring {
+  animation: pulseR 2s ease infinite;
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.anim-slide-left {
+  animation: slideLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.nav-link {
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #0EA5E9;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

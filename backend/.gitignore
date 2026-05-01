@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.env
+
+# AI Model weights (large files)
+app/ai_models/weights/*.h5
+app/ai_models/weights/*.pkl
+app/ai_models/weights/*.pt
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
