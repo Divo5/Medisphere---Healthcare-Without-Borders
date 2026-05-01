@@ -10,14 +10,14 @@ class Settings(BaseSettings):
     # App
     APP_NAME: str = "Medisphere"
     DEBUG: bool = False
-    SECRET_KEY: str = "your-secret-key-change-in-production"
+    SECRET_KEY: str 
 
     # MongoDB
-    MONGODB_URL: str = "mongodb://localhost:27017"
+    MONGODB_URL: str
     DB_NAME: str = "medisphere_db"
 
     # JWT
-    JWT_SECRET: str = "jwt-secret-key-change-in-production"
+    JWT_SECRET: str 
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
     REFRESH_TOKEN_EXPIRE_DAYS: int = 30
